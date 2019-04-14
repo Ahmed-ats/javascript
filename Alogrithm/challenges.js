@@ -145,23 +145,83 @@
 // Multiple Pointers - isSubsequence
 // Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
 
-function isSubsequence(str1, str2) {
-  if (str1.length === 0 || str2.length === 0) return false;
-  let i = 0;
-  let j = 0;
-  while (j < str2.length) {
-    if (str1[i] === str2[j]) i++, j++;
-    else j++;
-    if (i == str1.length) return true;
+// function isSubsequence(str1, str2) {
+//   if (str1.length === 0 || str2.length === 0) return false;
+//   let i = 0;
+//   let j = 0;
+//   while (j < str2.length) {
+//     if (str1[i] === str2[j]) i++, j++;
+//     else j++;
+//     if (i == str1.length) return true;
+//   }
+//   return false;
+// }
+
+
+// log(isSubsequence('hello', 'hello world')); // true
+// log(isSubsequence('sing', 'sting')); // true
+// log(isSubsequence('abc', 'abracadabra')); // true
+// log(isSubsequence('abc', 'acb')); // false (order matters)
+
+
+
+
+// Sliding Window - maxSubarraySum
+// Given an array of integers and a number, write a function called maxSubarraySum, which finds
+//the maximum sum of a subarray with the length of the number passed to the function.
+// Note that a subarray must consist of consecutive elements from the original array. In the first example below, [100, 200, 300] is a subarray of the original array, but [100, 300] is not.
+
+// Constraints:
+
+// Time Complexity - O(N)
+
+// Space Complexity - O(1)
+// function maxSubarraySum(arr, num) {
+//   if (arr.length < num) return null ;  
+//   let maxSum = 0;
+//   let tempSum = 0;
+//   for (let i = 0; i < num; i++) {
+//     maxSum += arr[i];
+//   }
+//    tempSum = maxSum; 
+//   for (let j = num; j < arr.length; j++) {
+//     tempSum = tempSum - arr[j - num] + arr[j]
+//     if (tempSum > maxSum) maxSum = tempSum;
+//   }
+//   return maxSum
+// }
+
+// log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4))  // 39 
+// log(maxSubarraySum([100,200,300,400], 2)) // 700
+// log(maxSubarraySum([-3,4,0,-2,6,-1], 2)) // 5
+// log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)) // 5
+// log(maxSubarraySum([2,3], 3)) // null
+
+
+// Sliding Window - minSubArrayLen
+// Write a function called minSubArrayLen which accepts two parameters - an array of positive integers and a positive integer.
+
+// This function should return the minimal length of a contiguous subarray of which the sum is greater than or equal to the integer passed to the function. If there isn't one, return 0 instead.
+// Time Complexity - O(n)
+
+// Space Complexity - O(1)
+// Examples:
+
+function minSubArrayLen(arr, num) {
+  
+  for (let i of arr) {
+    if (i >= num) return 1;
   }
-  return false;
+  let minimal = 2;
+ 
+   return 0;
 }
 
-
-log(isSubsequence('hello', 'hello world')); // true
-log(isSubsequence('sing', 'sting')); // true
-log(isSubsequence('abc', 'abracadabra')); // true
-log(isSubsequence('abc', 'acb')); // false (order matters)
-
-
+log(minSubArrayLen([2,3,1,2,4,3], 7)) // 2 -> because [4,3] is the smallest subarray
+log(minSubArrayLen([2,1,6,5,4], 9)) // 2 -> because [5,4] is the smallest subarray
+log(minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19], 52)) // 1 -> because [62] is greater than 52
+log(minSubArrayLen([1,4,16,22,5,7,8,9,10],39)) // 3
+log(minSubArrayLen([1,4,16,22,5,7,8,9,10],55)) // 5
+log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)) // 2
+log(minSubArrayLen([1,4,16,22,5,7,8,9,10],95)) // 0
 
